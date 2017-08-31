@@ -17,10 +17,12 @@ export default {
   },
   // actions用于处理异步事件，最后还是需要提交mutations来改变state
   actions: {
-    // 这里使用content来提交mutations
+    // 这里使用context来提交mutations
+    //increment (context)中的increment与context.commit('increment')中的increment是两个名字，两者无关，前者为自己定义的名字，也可以定义为别的，但后者则与mutations中的一致
     increment (context) {
       context.commit('increment')
     },
+    //context.commit('increment')括号中的increment为上边mutations中的increment，意思为提交给mutations中的increment方法
     incrementAsync (context) {
       setTimeout(() => {
         context.commit('increment')
@@ -32,10 +34,11 @@ export default {
       }, 1000)
     }
   },
-  // 在store中定义getters（可以认为是store的计算属性）。Getters接收state作为其第一个函数
+  // 在store中定义getters（可以认为是store的计算属性）。Getters接收state作为其第一个参数
   getters: {
     done(state) {
       return state.count + 5;
     },
   }
+
 }
